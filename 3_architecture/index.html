@@ -1,0 +1,1082 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/3_architecture/">
+      
+      
+        <link rel="prev" href="../2_installation/">
+      
+      
+        <link rel="next" href="../4_exploitation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Architecture - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Présentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#structure-du-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structure du code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialisation-rdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initialisation RDF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initialisation RDF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajout-dune-relation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ajout d'une relation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloture-du-graphe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clôture du graphe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dictionnaire-et-valeurs-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dictionnaire et valeurs globales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dictionnaire et valeurs globales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identifiants-et-liens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identifiants et liens
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fonctions-annexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fonctions annexes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fonctions annexes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creation-dimage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Création d'image
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creation-de-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Création de diagnostics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajout-dannotateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ajout d'annotateur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chargement-des-bases-de-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chargement des bases de données
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-des-polypes-partages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestion des polypes partagés
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-des-patients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestion des patients
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parseurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parseurs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fonction-principale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fonction principale
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_exploitation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exploitation des données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'utilisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#structure-du-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structure du code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialisation-rdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initialisation RDF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initialisation RDF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajout-dune-relation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ajout d'une relation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloture-du-graphe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clôture du graphe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dictionnaire-et-valeurs-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dictionnaire et valeurs globales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dictionnaire et valeurs globales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identifiants-et-liens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identifiants et liens
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fonctions-annexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fonctions annexes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fonctions annexes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creation-dimage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Création d'image
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creation-de-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Création de diagnostics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajout-dannotateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ajout d'annotateur
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chargement-des-bases-de-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chargement des bases de données
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-des-polypes-partages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestion des polypes partagés
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-des-patients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestion des patients
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parseurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parseurs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fonction-principale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fonction principale
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="architecture">Architecture</h1>
+<p>Afin de mieux comprendre comment la structure du projet, cette section est une vitrine des différentes fonction utilisées pour le parseur ainsi que les noms de classes, sous-classes, propriétés ainsi que les hiérarchies pour pouvoir mieux ajouter de nouvelles bases de données par la suite et pouvoir faire des requêtes fonctionnelles avec les noms adaptés.</p>
+<h2 id="structure-du-code">Structure du code</h2>
+<p>Le code se sépare en trois axes principaux : </p>
+<ul>
+<li><strong>Initialisation du graphe</strong> : Création du graphe contenant toutes les images.</li>
+<li><strong>Dictionnaires et valeurs globales</strong> : Afin d'avoir un accès simple au différentes URI utilisées, réutilisables pour chaque base de données. Contient également les outils d'unifications des images notamment les identifiants de chaque image ou de polypes.</li>
+<li><strong>Fonctions annexes</strong> : Fonctions utilisées par les parseurs pour automatiser la création des entités (<code>create_image</code>, <code>create_diagnosis</code>, <code>create_patient</code>...).</li>
+<li><strong>Parseurs</strong> : Fonction individuelle à chaque base de données pour extraire les informations de chaque image afin de créer les relations liées à celle-ci devant être ajouté au graphe.</li>
+<li><strong>Fonction main</strong> : Parcours de chaque base de donnée et génération finale du fichier Turtle</li>
+</ul>
+<hr />
+<h2 id="initialisation-rdf">Initialisation RDF</h2>
+<h3 id="format">Format</h3>
+<p>Le graphe des données est stocké dans un fichier RDF sous le format turtle. Les informations sont stockés sous la forme de <a href="https://fr.wikipedia.org/wiki/Triplet_RDF">triplets</a> <em>(sujet, predicats, objet)</em>. La sémantique RDF est détaillée dans le <a href="4_guide.md#graphe-rdf">guide RDF</a>. pour plus d'informations. Toutefois, il est important de noter que par la suite, cette sémantique est celle utilisée pour ajouter dans le graphe g: </p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">EX</span> <span class="o">=</span> <span class="n">Namespace</span><span class="p">(</span><span class="s2">&quot;http://example.org/polyps#&quot;</span><span class="p">)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">g</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;ex&quot;</span><span class="p">,</span> <span class="n">EX</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="ajout-dune-relation">Ajout d'une relation</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>g.add((img_uri, EX.hasDiagnosis, diag_uri))
+</span></code></pre></div>
+<p><img alt="Schéma Architecture" src="../images/eximgdiag.svg" /></p>
+<h3 id="cloture-du-graphe">Clôture du graphe</h3>
+<p>Dans le main, le graphe n'est finalisé qu'une fois que l'instruction <code>g.serialize("EX.ttl", format="turtle")</code> est executée, avec en paramètre le nom du fichier turtle et le format souhaité. </p>
+<h2 id="dictionnaire-et-valeurs-globales">Dictionnaire et valeurs globales</h2>
+<p>Deux raisons principales poussent à avoir des dictionnaires ou valeurs globales : la première étant de simplifier la conversion du nom litéral rencontré en URI utilisable par le graphe et les requêtes. D'autre part, nous souhaitons unifier les bases de données en donnant à chaque image un identifiant unique mais en donner également aux patients, polypes, annotateurs et diagnostics afin de lier plus simplement les différents documents entre eux sans rencontrer de conflits notamment avec les noms. </p>
+<h3 id="mapping">Mapping</h3>
+<p>Ces dictionnaires permettent de faire une conversion unifiée par tous les parseurs. Nous recommandons d'ajouter si besoin les nouvelles écritures rencontrées dans les dictionnaires suivants afin de mettre à jour automatiquement pour les anciennes bases de données déjà ajouté mais également pour s'assurer de ne pas faire de doublons d'informations.</p>
+<p>Dictionnaire d'annotateurs lorsqu'une base de donnée contient plusieurs annotateurs jugeant la même image. C'est le cas pour la base <code>`Colonoscopic Dataset</code></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">ANNOTATOR_ROLE_MAP</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s2">&quot;EXPERT 1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;MedicalExpert&quot;</span><span class="p">,</span> <span class="s2">&quot;Expert 1 COLONOSCOPY&quot;</span><span class="p">),</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">&quot;EXPERT 2&quot;</span><span class="p">:(</span><span class="s2">&quot;MedicalExpert&quot;</span><span class="p">,</span> <span class="s2">&quot;Expert 2 COLONOSCOPY&quot;</span><span class="p">),</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s2">&quot;EXPERT 3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;MedicalExpert&quot;</span><span class="p">,</span> <span class="s2">&quot;Expert 3 COLONOSCOPY&quot;</span><span class="p">),</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="s2">&quot;EXPERT 4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;MedicalExpert&quot;</span><span class="p">,</span> <span class="s2">&quot;Expert 4 COLONOSCOPY&quot;</span><span class="p">),</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="s2">&quot;BEGINNER 1&quot;</span><span class="p">:(</span><span class="s2">&quot;Beginner&quot;</span><span class="p">,</span> <span class="s2">&quot;Beginner 1 COLONOSCOPY&quot;</span><span class="p">),</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="s2">&quot;BEGINNER 2&quot;</span><span class="p">:(</span><span class="s2">&quot;Beginner&quot;</span><span class="p">,</span> <span class="s2">&quot;Beginner 2 COLONOSCOPY&quot;</span><span class="p">),</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="s2">&quot;BEGINNER 3&quot;</span><span class="p">:(</span><span class="s2">&quot;Beginner&quot;</span><span class="p">,</span> <span class="s2">&quot;Beginner 3 COLONOSCOPY&quot;</span><span class="p">),</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Le dictionnaire <code>SUBTYPE_MAP</code> est le dictionnaire clé pour la gestion des diagnostics. Certaines bases de données peuvent avoir des écritures austères comme par exemple <code>t + v</code>. Le dictionnaire permet également de prendre en compte les différentes écritures d'un même diagnostic comme par exemple <code>hyperplasic</code> et <code>hyperplastic</code>. Le dictionnaire permet également de modifier le diagnostic si l'URI ne corresponds plus : par exemple, si par la suite il est nécessaire d'avoir une sous-classe dédié pour tous les <code>inflammatory</code> rencontré, modifié le dictionnaire permet de modifier le diagnostic pour toutes les bases de données sans autres vérifications antérieures pour chaque parseur.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">SUBTYPE_MAP</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="s2">&quot;adenoma&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Adenoma</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;hyperplastic&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Hyperplastic</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="s2">&quot;hyperplasic&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Hyperplastic</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="s2">&quot;sessile&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">SessileSerratedLesion</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="s2">&quot;serrated&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">SessileSerratedLesion</span><span class="p">,</span> 
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="s2">&quot;tubular&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">TubularAdenoma</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="s2">&quot;villous&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">TubularVillousAdenoma</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="s2">&quot;adenomatous&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Adenoma</span><span class="p">,</span> 
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="s2">&quot;t + v&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">TubularVillousAdenoma</span><span class="p">,</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="s2">&quot;tubulovillous&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">TubularVillousAdenoma</span><span class="p">,</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="s2">&quot;traditional serrated adenoma&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">SessileSerratedLesion</span><span class="p">,</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="s2">&quot;adenocarcinoma&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Cancer</span><span class="p">,</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="s2">&quot;cancer&quot;</span> <span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Cancer</span><span class="p">,</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="s2">&quot;inflammatory&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Other</span><span class="p">,</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="s2">&quot;serrated, hyperplastic&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">SessileSerratedLesion</span><span class="p">,</span> <span class="n">EX</span><span class="o">.</span><span class="n">Hyperplastic</span><span class="p">]</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Indique la location de l'entité présente sur la photo, normale ou anormale, dans le corps.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">LOCATION_MAP</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>        <span class="s2">&quot;cecum&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Cecum</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="s2">&quot;rectum&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Rectum</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="s2">&quot;colon&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Colon</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="s2">&quot;gastric&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Gastric</span><span class="p">,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="s2">&quot;stomach&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Stomach</span><span class="p">,</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="s2">&quot;pylorus&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Pylorus</span><span class="p">,</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="s2">&quot;esophagus&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Esophagus</span><span class="p">,</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="s2">&quot;ileum&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Ileum</span><span class="p">,</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="s2">&quot;small bowel&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">SmallBowel</span><span class="p">,</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="s2">&quot;ileum&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">Ileum</span><span class="p">,</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Correspondance entre chaque diagnostic de classification comme <code>JNET</code>  ou <code>PARIS</code> et l'URI.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">PARIS_MAP</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="s2">&quot;0-Ip&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0Ip</span><span class="p">],</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="s2">&quot;0-Ips&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0Ips</span><span class="p">],</span>  
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="s2">&quot;0-lps&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0Ips</span><span class="p">],</span>  
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="s2">&quot;0-Is&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0Is</span><span class="p">],</span>   
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="s2">&quot;0-ls&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0Is</span><span class="p">],</span>   
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="s2">&quot;0-IIa&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0IIa</span><span class="p">],</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="s2">&quot;0-IIb&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0IIb</span><span class="p">],</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="s2">&quot;0-IIc&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0IIc</span><span class="p">],</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="s2">&quot;0-IIa + Is&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0IIa</span><span class="p">,</span> <span class="n">EX</span><span class="o">.</span><span class="n">Paris_0Is</span><span class="p">],</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="s2">&quot;0-IIa + IIc&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0IIa</span><span class="p">,</span> <span class="n">EX</span><span class="o">.</span><span class="n">Paris_0IIc</span><span class="p">],</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="s2">&quot;0-IIa /c&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0IIa</span><span class="p">,</span> <span class="n">EX</span><span class="o">.</span><span class="n">Paris_0IIc</span><span class="p">],</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    <span class="s2">&quot;0-IIa + Ip&quot;</span><span class="p">:[</span><span class="n">EX</span><span class="o">.</span><span class="n">Paris_0IIa</span><span class="p">,</span> <span class="n">EX</span><span class="o">.</span><span class="n">Paris_0Ip</span><span class="p">],</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="s2">&quot;0-Ip + Is&quot;</span><span class="p">:[</span><span class="n">EX</span><span class="o">.</span><span class="n">Pari_0Ip</span><span class="p">,</span> <span class="n">EX</span><span class="o">.</span><span class="n">Paris_0Is</span><span class="p">],</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="p">}</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="n">JNET_MAP</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">JNET_Type1</span><span class="p">,</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    <span class="s2">&quot;2A&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">JNET_Type2A</span><span class="p">,</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    <span class="s2">&quot;2B&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">JNET_Type2B</span><span class="p">,</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>    <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">JNET_Type3</span><span class="p">,</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="p">}</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="n">LST_MAP</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    <span class="s2">&quot;LST-G HT&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">LST_G</span><span class="p">,</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    <span class="s2">&quot;LST-G MN&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">LST_G</span><span class="p">,</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>    <span class="s2">&quot;LST-NG PD&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">LST_NG</span><span class="p">,</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    <span class="s2">&quot;LST-NG FT&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">LST_NG</span><span class="p">,</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="p">}</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="n">NICE_MAP</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>    <span class="s2">&quot;type 1&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">NICE_Type1</span><span class="p">,</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>    <span class="s2">&quot;type 2&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">NICE_Type2</span><span class="p">,</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>    <span class="s2">&quot;type 3&quot;</span><span class="p">:</span> <span class="n">EX</span><span class="o">.</span><span class="n">NICE_Type3</span><span class="p">,</span>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="identifiants-et-liens">Identifiants et liens</h3>
+<p>Il est parfois demandé pour certaines bases de données de relier une image à une autre ou à un patient. Les dictionnaires de polypes et de patients permettent de stocker les URI pour pouvoir les retrouver lorsqu'une image est liée à celle ci. Cette méthode est utilisé lorsqu'il n'est pas possible de déduire le chemin de images liées.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># utilisé pour avoir un identifiant unique pour chaque image, patient, diagnostic, annotateur et polype.</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">IMAGE_ID</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">DIAG_ID</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">ANNOTATOR_ID</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">POLYP_ID</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># stockage des ID et des URI pour pouvoir faire les liens.</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">POLYP_DIAGNOSES</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">POLYP_INSTANCES</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">PATIENT_REGISTRY</span> <span class="o">=</span> <span class="p">{}</span>  
+</span></code></pre></div>
+<hr />
+<h2 id="fonctions-annexes">Fonctions annexes</h2>
+<p>Les fonctions annexes permettent de simplifier les parseurs, certaines de ces fonctions sont utilisées quasi systématiquement comme <code>create_image</code>, <code>add_annotator</code> et d'autres dans les cas de liaisons d'objets comme  <code>get_polype_instance(polype_name)</code>.</p>
+<h3 id="creation-dimage">Création d'image</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span> <span class="nf">create_image</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">db_id</span><span class="p">):</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>     <span class="k">return</span> <span class="n">img_id</span><span class="p">,</span> <span class="n">img_uri</span>
+</span></code></pre></div>
+<p>La fonction <code>create_image</code> permet de créer les relations de propriétés basiques de l'image:</p>
+<ul>
+<li>Le type (RDF.type)</li>
+<li>La base de données d'origine (EX.belongsToDataset)</li>
+<li>Le chemin d'origine (EX.hasPath)</li>
+<li>Le format de l'image (EX.hasFormat)</li>
+<li>La taille de l'image en octet (EX.fileSize)</li>
+<li>La largeur de l'image (EX.width)</li>
+<li>La longueur de l'image (EX.height)</li>
+<li>La durée de la vidéo en seconde (EX.duration) </li>
+</ul>
+<p>Toutes les propriétés sont détaillées dans le <a href="5_exploitation.md#propriétés">tableau des propriété</a>.</p>
+<p>La fonction prends en paramètre le chemin vers le fichier, le nom du fichier et l'ID de son dataset d'origine. La fonction retourne l'ID de l'image créee ainsi que son URI.</p>
+<h3 id="creation-de-diagnostics">Création de diagnostics</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span> <span class="nf">create_diagnosis</span><span class="p">(</span><span class="n">img_uri</span><span class="p">,</span> <span class="n">diag_type_uri</span><span class="p">,</span> <span class="n">annotator_uri</span><span class="p">):</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="k">return</span> <span class="n">diag_uri</span>
+</span></code></pre></div>
+<p>Crée les propriétés de base liées à un diagnostic d'une image : Prends en paramètre l'URI de l'image, l'URI du type de diagnostic comme par exemple EX:Polyp et l'URI de l'annotateur de l'image. Retourne l'URI du diagnostic.</p>
+<ul>
+<li>l'annotateur (EX:annotatedBy)</li>
+<li>le diagnostic (EX:hasDiagnosis)</li>
+</ul>
+<h3 id="ajout-dannotateur">Ajout d'annotateur</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span> <span class="nf">add_annotator</span><span class="p">(</span><span class="n">annotator_type</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verified</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span></code></pre></div>
+<p>Par défaut, toutes les images ont des annotateurs, qu'on estime être des experts médicaux (EX.MedicalExpert). Un annotateur peut etre un expert médical, un laboratoire ou un débutant. Le label, None par défaut, est le nom de l'annotateur. Nous estimons possible que dans le futur, le nom du médecin soit disponible, d'où le label. Il est toutefois déjà utile pour préciser quel est le type d'expert médical. La fonction retourne l'URI de l'annotateur.</p>
+<ul>
+<li>la véracité de l'information (EX:isVerified)</li>
+<li>le type d'annotateur</li>
+</ul>
+<h3 id="chargement-des-bases-de-donnees">Chargement des bases de données</h3>
+<p>Afin de simplifier la prise en main, les métadonnées liées aux bases de données sont contenues dans un fichier json dans lesquelles il faut simplement entrer les information liées à la base</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span> <span class="nf">load_databases</span><span class="p">(</span><span class="n">json_path</span><span class="p">):</span>
+</span></code></pre></div>
+<p>Prends en paramètre le chemin du fichier contenant les informations des bases de données et crée</p>
+<ul>
+<li>le pays de la base (EX:country)</li>
+<li>le nom de la base (EX:name)</li>
+<li>le type d'accès (privé ou public)</li>
+<li>l'ID de la base de données</li>
+</ul>
+<h3 id="gestion-des-polypes-partages">Gestion des polypes partagés</h3>
+<p>Dans notre architecture, nous partons du principe <mark>qu'une image corresponds à un polype</mark> (ou autre diagnostic). Toutefois, il arrive qu'un même polype soit represénté par plusieurs images. Pour éviter les erreurs lors des test, nous utilions la fonction <code>get_polype_instance</code> avec le nom du polype afin de créer ou récupérer l'URI du polype à ajouter à une nouvelle image.</p>
+<ul>
+<li>Le type (EX.PolypInstance)</li>
+</ul>
+<h3 id="gestion-des-patients">Gestion des patients</h3>
+<p>De même pour les polypes, certaines images sont liées à un unique patient. Il peut être intéressant de stocker l'âge ou le sexe du patient, ou bien de voir d'autre polypes du patient (ou bien le même polype dans un angle différent). 
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span> <span class="nf">create_patient</span><span class="p">(</span><span class="n">patient_code</span><span class="p">,</span> <span class="n">sex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">is_child</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span></code></pre></div></p>
+<p>La fonction ajoute, lorsque possible, les informations passées en paramètre puis retourne l'URI du patient. Nous conseillons par la suite d'ajouter des paramètres suplémentaitres facultatifs (comme par exemple, si dans le futur une base de données contient entièrement un registre de patient en rémission).</p>
+<hr />
+<h2 id="parseurs">Parseurs</h2>
+<p>Tous les parseurs ont comme paramètres obligatoires</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span> <span class="nf">parse_BDD</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">ann_uri</span><span class="p">):</span>
+</span></code></pre></div>
+<p>L'objectif est de stocker toutes les informations relatives à l'image : Bien que certaines propriétés sont traçables simplement (taille en octet, durée d'une vidéo...), la plupart des base de données nécessitent d'étudier <strong>individuellement la structure</strong>. Des conseils pour savoir quelles questions se poser et la méthodologie à avoir sont mieux expliquées dans le <a href="4_guide#base-de-données">guide des bases de données</a>. En résumé, la partie parseurs permet pour chaque base de données d'ajouter au graphe g les informations accessibles pour une image. Il est aussi important de noter que certaines base de données nécessitent des fonctions annexes pour la lecture de fichier CSV ou XML par exemple. </p>
+<hr />
+<h2 id="fonction-principale">Fonction principale</h2>
+<p>La fonction <code>main</code> est le lieu ou l'opération de construction de graphe se produit :</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>    <span class="n">ann_kumc</span> <span class="o">=</span> <span class="n">add_annotator</span><span class="p">(</span><span class="s2">&quot;MedicalExpert&quot;</span><span class="p">,</span> <span class="s2">&quot;MedicalExpert KUMC&quot;</span><span class="p">)</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">kumc_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;KUMC Dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;KUMC Dataset&quot;</span><span class="p">,</span> <span class="s2">&quot;Dataset&quot;</span><span class="p">))</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">kumc_root</span><span class="p">):</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>        <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">kumc_root</span><span class="p">):</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>                <span class="n">parse_KUMC</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">ann_kumc</span><span class="p">)</span>
+</span></code></pre></div>
+<p>En prenant exemple sur l'application d'un parseur sur le dataset KUMC, on voit qu'il est nécessaire de parcourir chaque image. Il faut donc avoir le chemin d'accès à chaque dossier et parcourir en utilisant le parseur sur chaque image. Egalement, on rappelle que les annotateurs sont par défaut non vérifier, et qu'il sont à gérer dans cette partie du code principal.</p>
+<p>La fonction principale doit se terminer par la <a href="./#initialisation-rdf">clôture du graphe</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["header.autohide", "navigation.instant", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
